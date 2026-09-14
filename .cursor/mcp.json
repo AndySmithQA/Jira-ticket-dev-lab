@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "training-jira": {
+      "command": "node",
+      "args": ["dist/training-jira/server.js"]
+    }
+  }
+}

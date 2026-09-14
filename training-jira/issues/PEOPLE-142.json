@@ -1,0 +1,166 @@
+{
+  "id": "10042",
+  "key": "PEOPLE-142",
+  "self": "https://training.atlassian.net/rest/api/3/issue/10042",
+  "fields": {
+    "project": {
+      "id": "10001",
+      "key": "PEOPLE",
+      "name": "People Platform",
+      "projectTypeKey": "software"
+    },
+    "issuetype": {
+      "id": "10001",
+      "name": "Story",
+      "subtask": false
+    },
+    "summary": "Retain employee records when an administrator deletes an account",
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "heading",
+          "attrs": { "level": 2 },
+          "content": [{ "type": "text", "text": "User story" }]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "As a People Operations administrator, I want deleted employees to be retained as inactive records so that employment history remains available for audit and support."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": { "level": 2 },
+          "content": [{ "type": "text", "text": "Background" }]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "The current DELETE endpoint permanently removes an employee from the in-memory repository. This means administrators lose access to the historical record."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": { "level": 2 },
+          "content": [{ "type": "text", "text": "Acceptance criteria" }]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [{ "type": "text", "text": "AC1: Given an active employee, when an administrator deletes that employee, then the endpoint returns 204 and the stored record has active set to false." }]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [{ "type": "text", "text": "AC2: Inactive employees do not appear in GET /employees, including filtered searches." }]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [{ "type": "text", "text": "AC3: GET /employees/:id returns 404 for an inactive employee." }]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [{ "type": "text", "text": "AC4: Administrators can still see inactive employees in GET /admin/employees and GET /admin/employees/:id." }]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [{ "type": "text", "text": "AC5: Deleting an employee who is already inactive is idempotent and returns 204." }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": { "level": 2 },
+          "content": [{ "type": "text", "text": "Out of scope" }]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Reactivating an employee." }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Database persistence or schema migrations." }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Changing email uniqueness rules." }] }]
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "id": "10000",
+      "name": "To Do",
+      "statusCategory": { "key": "new", "name": "To Do" }
+    },
+    "priority": {
+      "id": "3",
+      "name": "Medium"
+    },
+    "assignee": null,
+    "reporter": {
+      "accountId": "training-product-owner",
+      "displayName": "Priya Shah",
+      "emailAddress": "priya.shah@example.test"
+    },
+    "labels": ["backend", "audit", "lab"],
+    "components": [{ "id": "10010", "name": "Employee Directory API" }],
+    "sprint": {
+      "id": 18,
+      "name": "People Platform Sprint 18",
+      "state": "active"
+    },
+    "storyPoints": 3,
+    "created": "2026-09-08T09:15:00.000+0100",
+    "updated": "2026-09-10T14:40:00.000+0100",
+    "comment": {
+      "total": 1,
+      "comments": [
+        {
+          "id": "20001",
+          "author": { "displayName": "Priya Shah" },
+          "created": "2026-09-10T14:40:00.000+0100",
+          "body": "Compliance confirmed that retaining the record in the existing store is sufficient for this exercise. No timestamp is required."
+        }
+      ]
+    }
+  }
+}
