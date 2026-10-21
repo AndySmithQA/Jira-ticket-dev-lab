@@ -22,7 +22,11 @@ export class EmployeeService {
   }
 
   getForDirectory(id: string): Employee {
-    return this.requireEmployee(id);
+    const employee = this.requireEmployee(id);
+    if (!employee.active) {
+      throw new HttpError(404, `Employee ${id} was not found`);
+    }
+    return employee;
   }
 
   listForAdmin(): Employee[] {

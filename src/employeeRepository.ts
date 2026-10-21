@@ -37,7 +37,11 @@ export class EmployeeRepository {
         !department || employee.department.toLowerCase() === department.toLowerCase();
       const haystack =
         `${employee.firstName} ${employee.lastName} ${employee.email}`.toLowerCase();
-      return matchesDepartment && (!term || haystack.includes(term));
+      return (
+        employee.active &&
+        matchesDepartment &&
+        (!term || haystack.includes(term))
+      );
     });
   }
 
@@ -60,8 +64,10 @@ export class EmployeeRepository {
     return copy(updated);
   }
 
-  // Current shipped behaviour: deleting permanently removes the record.
   remove(id: string): boolean {
-    return this.employees.delete(id);
+    const current = this.employees.get(id);
+    if (!current) return false;
+    this.employees.set(id, { ...current, active: false });
+    return true;
   }
 }

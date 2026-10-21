@@ -59,13 +59,13 @@ describe("Employee Directory API baseline", () => {
     });
   });
 
-  it("currently deletes an employee permanently", async () => {
+  it("retains a deleted employee as inactive", async () => {
     const app = createApp({ repository });
     const deleted = await request(app)
       .delete("/admin/employees/emp-2")
       .set("x-role", "admin");
 
     expect(deleted.status).toBe(204);
-    expect(repository.findById("emp-2")).toBeUndefined();
+    expect(repository.findById("emp-2")).toMatchObject({ active: false });
   });
 });
